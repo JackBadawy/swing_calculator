@@ -1,82 +1,84 @@
 package com.swingcalc.application;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.border.EmptyBorder;
 
-	
+public class App extends JFrame {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int xOffset = 0;
+    private int yOffset = 0;
+    private CalculatorUI calculatorUI;
 
-	import javax.swing.*;
-	import java.awt.*;
-	import java.awt.event.MouseAdapter;
-	import java.awt.event.MouseEvent;
-	import javax.swing.border.EmptyBorder;
+    public App() {
+        // Model View Controller pattern
+        setTitle("CalculatorSwing");
+        setUndecorated(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(300, 340);
+        setLocationRelativeTo(null);
 
-	public class App extends JFrame {
-	    /**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-		private int xOffset = 0;
-	    private int yOffset = 0;
+        JPanel titleBar = new JPanel();
+        titleBar.setBackground(new Color(44, 44, 44));
+        titleBar.setBorder(new EmptyBorder(10, 10, 10, 10));
+        titleBar.setLayout(new BorderLayout());
 
-	    public App() {
-	        setTitle("CalculatorSwing"); 
-	        setUndecorated(true);
-	        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	        setSize(300, 340);
-	        setLocationRelativeTo(null);
+        JLabel titleLabel = new JLabel("CalculatorFX");
+        titleLabel.setForeground(Color.WHITE);
 
-	        JPanel titleBar = new JPanel();
-	        titleBar.setBackground(new Color(44, 44, 44));
-	        titleBar.setBorder(new EmptyBorder(10, 10, 10, 10));
-	        titleBar.setLayout(new BorderLayout());
+        JButton closeButton = new JButton("X");
+        closeButton.setForeground(Color.WHITE);
+        closeButton.setBackground(new Color(255, 0, 0));
+        closeButton.setBorderPainted(false);
+        closeButton.setFocusPainted(false);
+        closeButton.addActionListener(e -> dispose());
 
-	        JLabel titleLabel = new JLabel("CalculatorFX");
-	        titleLabel.setForeground(Color.WHITE);
+        titleBar.add(titleLabel, BorderLayout.WEST);
+        titleBar.add(Box.createHorizontalGlue(), BorderLayout.CENTER);
+        titleBar.add(closeButton, BorderLayout.EAST);
 
-	        JButton closeButton = new JButton("X");
-	        closeButton.setForeground(Color.WHITE);
-	        closeButton.setBackground(new Color(255, 0, 0));
-	        closeButton.setBorderPainted(false);
-	        closeButton.setFocusPainted(false);
-	        closeButton.addActionListener(e -> dispose());
+        titleBar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                xOffset = e.getX();
+                yOffset = e.getY();
+            }
+        });
 
-	        titleBar.add(titleLabel, BorderLayout.WEST);
-	        titleBar.add(Box.createHorizontalGlue(), BorderLayout.CENTER);
-	        titleBar.add(closeButton, BorderLayout.EAST);
+        titleBar.addMouseMotionListener(new MouseAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                setLocation(e.getXOnScreen() - xOffset, e.getYOnScreen() - yOffset);
+            }
+        });
 
-	        titleBar.addMouseListener(new MouseAdapter() {
-	            @Override
-	            public void mousePressed(MouseEvent e) {
-	                xOffset = e.getX();
-	                yOffset = e.getY();
-	            }
-	        });
+        JPanel container = new JPanel();
+        container.setLayout(new BorderLayout());
+        container.setBorder(BorderFactory.createEmptyBorder());
+        container.setBackground(Color.WHITE);
+        container.add(titleBar, BorderLayout.NORTH);
 
-	        titleBar.addMouseMotionListener(new MouseAdapter() {
-	            @Override
-	            public void mouseDragged(MouseEvent e) {
-	                setLocation(e.getXOnScreen() - xOffset, e.getYOnScreen() - yOffset);
-	            }
-	        });
+        calculatorUI = new CalculatorUI();
+        container.add(calculatorUI, BorderLayout.CENTER);
 
-	        JPanel container = new JPanel();
-	        container.setLayout(new BorderLayout());
-	        container.setBorder(BorderFactory.createEmptyBorder());
-	        container.setBackground(Color.WHITE);
-	        container.add(titleBar, BorderLayout.NORTH);
+        add(container);
+    }
 
-	        JPanel mainPanel = new JPanel();
-	        mainPanel.setBackground(Color.WHITE);
-	        container.add(mainPanel, BorderLayout.CENTER);
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            App app = new App();
+            app.setVisible(true);
 
-	        add(container);
-	    }
+            Controller controller = new Controller(app.getCalculatorUI());
+        });
+    }
 
-	    public static void main(String[] args) {
-	        SwingUtilities.invokeLater(() -> {
-	            App app = new App();
-	            app.setVisible(true);
-	        });
-	    }
-	}
-
-
+    public CalculatorUI getCalculatorUI() {
+        return calculatorUI;
+    }
+}
