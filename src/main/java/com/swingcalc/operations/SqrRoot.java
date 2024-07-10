@@ -8,6 +8,8 @@ public class SqrRoot implements Operation<Float>{
         return b;
 	} 
 	
+	//prime checker
+	
      return (float) Math.sqrt(b);
 }
 }
