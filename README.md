@@ -4,7 +4,7 @@
 
 ## Overview
 
-This project is a calculator application built using Swing. The goal of this project is to compare file size and CPU usage of Swing and JavaFX, and to create a functional and visually appealing desktop application.
+This project is a calculator application built using Swing. The goal of this project is to compare file size and CPU usage of Swing and JavaFX, and to create a functional and visually appealing desktop application. In general using Swing appears to produce significantly smaller and faster apps then JavaFX
 
 ## Features
 
