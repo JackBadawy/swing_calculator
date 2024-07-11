@@ -1,6 +1,6 @@
 # Swing Calculator Application
 
-![Screenshot]([src/img.PNG](https://github.com/JackBadawy/swing_calculator/blob/main/src/img.png))
+![Screenshot](https://github.com/JackBadawy/swing_calculator/blob/main/src/img.png)
 
 ## Overview
 
