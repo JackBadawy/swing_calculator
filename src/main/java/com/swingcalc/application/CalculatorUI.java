@@ -103,6 +103,7 @@ public class CalculatorUI extends JPanel {
         button.setFont(new Font("Arial", Font.PLAIN, 20));
         button.setOpaque(false); 
         button.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5)); 
+        button.setName("button" + text);
         return button;
     }
 
@@ -180,5 +181,9 @@ public class CalculatorUI extends JPanel {
 
     public void addClearButtonListener(ActionListener listener) {
         clearButton.addActionListener(listener);
+    }
+    
+    public void addToggleSignButtonListener(ActionListener listener) {
+        toggleSignButton.addActionListener(listener);
     }
 }

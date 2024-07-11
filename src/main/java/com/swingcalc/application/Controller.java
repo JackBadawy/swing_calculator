@@ -32,6 +32,7 @@ public class Controller {
 	        calculatorUI.addOperationButtonListener(new OperationButtonListener());
 	        calculatorUI.addEqualsButtonListener(new EqualsButtonListener());
 	        calculatorUI.addClearButtonListener(new ClearButtonListener());
+	        calculatorUI.addToggleSignButtonListener(new ToggleSignButtonListener());
 	    }
 
 	    private void clearInput() {
@@ -84,6 +85,17 @@ public class Controller {
 	            calculatorUI.getDisplayText().setText(e.getMessage());
 	        }
 	    }
+	    
+	    private void handleToggleSignClick() {
+	    	if (currentInputNumber.length() > 0) {
+	            if (currentInputNumber.charAt(0) == '-') {
+	                currentInputNumber.deleteCharAt(0);
+	            } else {
+	                currentInputNumber.insert(0, '-');
+	            }
+	            renderDisplayedNumber();
+	        }
+	    }
 
 	    private void renderDisplayedNumber() {
 	        calculatorUI.getDisplayText().setText(currentInputNumber.toString());
@@ -109,6 +121,13 @@ public class Controller {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
 	            handleEqualsClick();
+	        }
+	    }
+	    
+	    private class ToggleSignButtonListener implements ActionListener {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            handleToggleSignClick();
 	        }
 	    }
 

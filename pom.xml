@@ -5,4 +5,13 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>Swing Calculator</name>
   <description>a calculator made in swing</description>
+  
+  <dependencies>
+	  <dependency>
+		 <groupId>org.assertj</groupId>
+    <artifactId>assertj-swing-junit</artifactId>
+    <version>3.17.1</version>
+    <scope>test</scope> 
+	  </dependency>
+  </dependencies>
 </project>

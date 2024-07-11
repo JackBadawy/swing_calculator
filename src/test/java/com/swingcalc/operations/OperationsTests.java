@@ -22,8 +22,10 @@ public class OperationsTests {
 		}
 		@Test
 		public void zeroOrNullRuntimeExceptionTest() {
-			//zeroOrNullRuntimeExceptionTest
-			//prime number check
+			Operation<Float> division = new Division();
+	        Exception exception = assertThrows(ArithmeticException.class, () -> {
+	            division.apply(9.0f, 0.0f);
+	        });
+	        assertEquals("Cannot divide by zero", exception.getMessage());
 		}
-		
 	}

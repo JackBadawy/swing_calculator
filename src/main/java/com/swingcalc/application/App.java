@@ -16,7 +16,6 @@ public class App extends JFrame {
     private CalculatorUI calculatorUI;
 
     public App() {
-        // Model View Controller pattern
         setTitle("CalculatorSwing");
         setUndecorated(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
